@@ -11,9 +11,6 @@ import java.util.ArrayList;
 
 public interface IContactosView {
     void generarLayoutVertical ();
-
     ContactoAdapter crearAdaptador(ArrayList<Contacto> contactos);
-
     void inicializarAdaptador(ContactoAdapter adaptador);
-
 }

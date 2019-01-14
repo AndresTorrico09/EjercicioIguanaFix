@@ -37,22 +37,36 @@ public class IguanaFixService {
         return instance;
     }
 
-    public void getContactos() {
+    public void getContactos(final ContactoAdapter contactoAdapter) {
         apiManager.getContactos().
                 enqueue(new Callback<List<Contacto>>() {
                     @Override
                     public void onResponse(Call<List<Contacto>> call, Response<List<Contacto>> response) {
                         if (response.isSuccessful()) {
-                            //Globals.getInstance().setContactos(response.body());
-                            ContactoAdapter mAdapter = new ContactoAdapter(new ArrayList<>(response.body()));
-
-                            ListContactosActivity activity = (ListContactosActivity) context.getApplicationContext();
-                            activity.inicializarAdaptador(mAdapter);
+                            //Actualizo la informacion del adapter una vez que llega el response
+                            contactoAdapter.addAllItems(response.body());
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<Contacto>> call, Throwable t) {
+                        Throwable x = t;
+                    }
+                });
+    }
+
+    public void getContactoById(Integer id) {
+        apiManager.getContactoById(id).
+                enqueue(new Callback<Contacto>() {
+                    @Override
+                    public void onResponse(Call<Contacto> call, Response<Contacto> response) {
+                        if (response.isSuccessful()) {
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Contacto> call, Throwable t) {
                         Throwable x = t;
                     }
                 });

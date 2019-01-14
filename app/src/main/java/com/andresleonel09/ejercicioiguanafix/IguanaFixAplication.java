@@ -17,7 +17,7 @@ public class IguanaFixAplication extends Application {
 
     public static final String BASE_URL = "https://private-d0cc1-iguanafixtest.apiary-mock.com/";
 
-    private IguanaFixApi api;
+    public IguanaFixApi api;
 
     @Override
     public void onCreate() {
@@ -26,9 +26,6 @@ public class IguanaFixAplication extends Application {
         api = provideIguanaFixApi();
         ApiManager apiManager = new ApiManager(api);
         IguanaFixService.getInstance().init(this, apiManager);
-
-        //Inicio el servicio de busqueda contactos
-        IguanaFixService.getInstance().getContactos();
     }
 
     private IguanaFixApi provideIguanaFixApi() {

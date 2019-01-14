@@ -35,6 +35,9 @@ public class Contacto {
     @SerializedName("photo")
     @Expose
     private String photo;
+    @SerializedName("addresses")
+    @Expose
+    private List<Address> addresses = null;
 
     public String getUserId() {
         return userId;
@@ -125,5 +128,31 @@ public class Contacto {
             this.number = number;
         }
 
+    }
+
+    public class Address {
+
+        @SerializedName("work")
+        @Expose
+        private String work;
+        @SerializedName("home")
+        @Expose
+        private String home;
+
+        public String getWork() {
+            return work;
+        }
+
+        public void setWork(String work) {
+            this.work = work;
+        }
+
+        public String getHome() {
+            return home;
+        }
+
+        public void setHome(String home) {
+            this.home = home;
+        }
     }
 }

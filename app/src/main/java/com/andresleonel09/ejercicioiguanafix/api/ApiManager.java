@@ -20,4 +20,8 @@ public class ApiManager {
     public Call<List<Contacto>> getContactos(){
         return api.getContactos();
     }
+
+    public Call<Contacto> getContactoById(Integer id){
+        return api.getContactoById(id);
+    }
 }
