@@ -1,6 +1,7 @@
 package com.andresleonel09.ejercicioiguanafix.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.andresleonel09.ejercicioiguanafix.activity.DetailContactActivity;
+import com.andresleonel09.ejercicioiguanafix.activity.ListContactosActivity;
 import com.andresleonel09.ejercicioiguanafix.api.IguanaFixService;
 import com.andresleonel09.ejercicioiguanafix.models.Contacto;
 import com.andresleonel09.ejercicioiguanafix.R;
@@ -55,7 +58,9 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IguanaFixService.getInstance().getContactoById(Integer.valueOf(contacto.getUserId()));
+                Intent intent = new Intent(context, DetailContactActivity.class);
+                intent.putExtra("contacto", contacto);
+                context.startActivity(intent);
             }
         });
     }

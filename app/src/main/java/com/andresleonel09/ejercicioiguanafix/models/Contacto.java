@@ -1,15 +1,20 @@
 package com.andresleonel09.ejercicioiguanafix.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.provider.ContactsContract;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Andres-PC on 2019-01-13.
  */
 
-public class Contacto {
+public class Contacto implements Parcelable {
 
     @SerializedName("user_id")
     @Expose
@@ -28,7 +33,7 @@ public class Contacto {
     private String lastName;
     @SerializedName("phones")
     @Expose
-    private List<Phone> phones = null;
+    private List<Phone> phones = new ArrayList<>();
     @SerializedName("thumb")
     @Expose
     private String thumb;
@@ -37,7 +42,38 @@ public class Contacto {
     private String photo;
     @SerializedName("addresses")
     @Expose
-    private List<Address> addresses = null;
+    private List<Address> addresses = new ArrayList<>();
+    public final static Parcelable.Creator<Contacto> CREATOR = new Creator<Contacto>() {
+
+
+        @SuppressWarnings({
+                "unchecked"
+        })
+        public Contacto createFromParcel(Parcel in) {
+            return new Contacto(in);
+        }
+
+        public Contacto[] newArray(int size) {
+            return (new Contacto[size]);
+        }
+
+    }
+            ;
+
+    protected Contacto(Parcel in) {
+        this.userId = ((String) in.readValue((String.class.getClassLoader())));
+        this.createdAt = ((String) in.readValue((String.class.getClassLoader())));
+        this.birthDate = ((String) in.readValue((String.class.getClassLoader())));
+        this.firstName = ((String) in.readValue((String.class.getClassLoader())));
+        this.lastName = ((String) in.readValue((String.class.getClassLoader())));
+        in.readList(this.phones, (Phone.class.getClassLoader()));
+        this.thumb = ((String) in.readValue((String.class.getClassLoader())));
+        this.photo = ((String) in.readValue((String.class.getClassLoader())));
+        in.readList(this.addresses, (Address.class.getClassLoader()));
+    }
+
+    public Contacto() {
+    }
 
     public String getUserId() {
         return userId;
@@ -103,56 +139,28 @@ public class Contacto {
         this.photo = photo;
     }
 
-    public class Phone {
-
-        @SerializedName("type")
-        @Expose
-        private String type;
-        @SerializedName("number")
-        @Expose
-        private Object number;
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public Object getNumber() {
-            return number;
-        }
-
-        public void setNumber(Object number) {
-            this.number = number;
-        }
-
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public class Address {
-
-        @SerializedName("work")
-        @Expose
-        private String work;
-        @SerializedName("home")
-        @Expose
-        private String home;
-
-        public String getWork() {
-            return work;
-        }
-
-        public void setWork(String work) {
-            this.work = work;
-        }
-
-        public String getHome() {
-            return home;
-        }
-
-        public void setHome(String home) {
-            this.home = home;
-        }
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
+
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(userId);
+        dest.writeValue(createdAt);
+        dest.writeValue(birthDate);
+        dest.writeValue(firstName);
+        dest.writeValue(lastName);
+        dest.writeList(phones);
+        dest.writeValue(thumb);
+        dest.writeValue(photo);
+        dest.writeList(addresses);
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
 }

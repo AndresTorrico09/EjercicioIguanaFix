@@ -61,7 +61,6 @@ public class IguanaFixService {
                     @Override
                     public void onResponse(Call<Contacto> call, Response<Contacto> response) {
                         if (response.isSuccessful()) {
-
                         }
                     }
 
