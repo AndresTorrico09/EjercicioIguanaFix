@@ -17,6 +17,9 @@ public class Address implements Parcelable
     @SerializedName("work")
     @Expose
     private String work;
+    @SerializedName("home")
+    @Expose
+    private String home;
     public final static Parcelable.Creator<Address> CREATOR = new Creator<Address>() {
 
 
@@ -36,6 +39,7 @@ public class Address implements Parcelable
 
     protected Address(Parcel in) {
         this.work = ((String) in.readValue((String.class.getClassLoader())));
+        this.home = ((String) in.readValue((String.class.getClassLoader())));
     }
 
     public Address() {
@@ -51,10 +55,18 @@ public class Address implements Parcelable
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(work);
+        dest.writeValue(home);
     }
 
     public int describeContents() {
         return 0;
     }
 
+    public String getHome() {
+        return home;
+    }
+
+    public void setHome(String home) {
+        this.home = home;
+    }
 }

@@ -2,14 +2,10 @@ package com.andresleonel09.ejercicioiguanafix.api;
 
 import android.content.Context;
 
-import com.andresleonel09.ejercicioiguanafix.Globals;
-import com.andresleonel09.ejercicioiguanafix.activity.ListContactosActivity;
+import com.andresleonel09.ejercicioiguanafix.activity.onUpdateViewCustomListener;
 import com.andresleonel09.ejercicioiguanafix.adapter.ContactoAdapter;
 import com.andresleonel09.ejercicioiguanafix.models.Contacto;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -55,12 +51,14 @@ public class IguanaFixService {
                 });
     }
 
-    public void getContactoById(Integer id) {
+    public void getContactoById(final onUpdateViewCustomListener onUpdateViewCustomListener, Integer id) {
         apiManager.getContactoById(id).
                 enqueue(new Callback<Contacto>() {
                     @Override
                     public void onResponse(Call<Contacto> call, Response<Contacto> response) {
                         if (response.isSuccessful()) {
+                            //llamamos a la interfaz para enviar la data
+                            onUpdateViewCustomListener.onAddContact(context, response.body());
                         }
                     }
 

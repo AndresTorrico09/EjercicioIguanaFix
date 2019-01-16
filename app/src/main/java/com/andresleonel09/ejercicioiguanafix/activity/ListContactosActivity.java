@@ -10,7 +10,11 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.andresleonel09.ejercicioiguanafix.adapter.ContactoAdapter;
 import com.andresleonel09.ejercicioiguanafix.models.Contacto;
@@ -19,21 +23,48 @@ import com.andresleonel09.ejercicioiguanafix.presenter.IContactosPresenter;
 import com.andresleonel09.ejercicioiguanafix.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
-public class ListContactosActivity extends AppCompatActivity implements IContactosView,android.support.v7.widget.SearchView.OnQueryTextListener{
+import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
+
+public class ListContactosActivity extends AppCompatActivity implements IContactosView,android.support.v7.widget.SearchView.OnQueryTextListener {
 
     ArrayList<Contacto> contactos;
-    private RecyclerView listaContactos;
+    private RecyclerView rvContactos;
     private IContactosPresenter presenter;
     private ContactoAdapter mAdapter;
+    //Map<String, Integer> mapIndex;
+    //ListView contactList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listaContactos = (RecyclerView) findViewById(R.id.rvContactos);
+        rvContactos = (RecyclerView) findViewById(R.id.rvContactos);
         presenter = new ContactosPresenter(this, this);
+
+/*
+        VerticalRecyclerViewFastScroller fastScroller = (VerticalRecyclerViewFastScroller) findViewById(R.id.fast_scroller);
+        // Connect the recycler to the scroller (to let the scroller scroll the list)
+        fastScroller.setRecyclerView(rvContactos);
+        // Connect the scroller to the recycler (to let the recycler scroll the scroller's handle)
+        rvContactos.setOnScrollListener(fastScroller.getOnScrollListener());
+*/
+
+/*        String[] contacts = getResources().getStringArray(R.array.contacts_array);
+        Arrays.asList(contacts);
+        contactList = (ListView) findViewById(R.id.list_contacts);
+        contactList.setFastScrollEnabled(true);
+        contactList.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, contacts));
+
+        getIndexList(contacts);
+        displayIndex();*/
+
     }
 
     @Override
@@ -78,7 +109,7 @@ public class ListContactosActivity extends AppCompatActivity implements IContact
     public void generarLayoutVertical() {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        listaContactos.setLayoutManager(llm);
+        rvContactos.setLayoutManager(llm);
     }
 
     @Override
@@ -89,7 +120,7 @@ public class ListContactosActivity extends AppCompatActivity implements IContact
 
     @Override
     public void inicializarAdaptador(ContactoAdapter mAdapter) {
-        listaContactos.setAdapter(mAdapter);
+        rvContactos.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -102,4 +133,34 @@ public class ListContactosActivity extends AppCompatActivity implements IContact
     public boolean onQueryTextChange(String newText) {
         return false;
     }
+
+/*    private void getIndexList(String[] contacts) {
+        mapIndex = new LinkedHashMap<String, Integer>();
+        for (int i = 0; i < contacts.length; i++) {
+            String contact = contacts[i];
+            String index = contact.substring(0, 1);
+
+            if (mapIndex.get(index) == null)
+                mapIndex.put(index, i);
+        }
+    }
+
+    private void displayIndex() {
+        LinearLayout indexLayout = (LinearLayout) findViewById(R.id.side_index);
+
+        TextView textView;
+        List<String> indexList = new ArrayList<>(mapIndex.keySet());
+        for (String index : indexList) {
+            textView = (TextView) getLayoutInflater().inflate(
+                    R.layout.side_index_item, null);
+            textView.setText(index);
+            textView.setOnClickListener(this);
+            indexLayout.addView(textView);
+        }
+    }
+
+    public void onClick(View view) {
+        TextView selectedIndex = (TextView) view;
+        contactList.setSelection(mapIndex.get(selectedIndex.getText()));
+    }*/
 }

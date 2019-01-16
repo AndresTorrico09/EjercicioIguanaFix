@@ -2,10 +2,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     tools:context="com.andresleonel09.ejercicioiguanafix.activity.ListContactosActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvContactos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+<!--
+    <xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller
+        android:id="@+id/fast_scroller"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        />-->
+<!--    <ListView
+        android:id="@+id/list_contacts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingRight="5dp" >
+    </ListView>
+    <LinearLayout
+        android:id="@+id/side_index"
+        android:layout_width="50dp"
+        android:layout_height="fill_parent"
+        android:background="#c3c3c3"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+    </LinearLayout>-->
 </LinearLayout>

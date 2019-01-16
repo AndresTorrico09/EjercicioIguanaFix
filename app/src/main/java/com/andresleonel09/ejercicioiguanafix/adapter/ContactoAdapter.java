@@ -22,6 +22,8 @@ import com.andresleonel09.ejercicioiguanafix.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.andresleonel09.ejercicioiguanafix.R.id.parent;
@@ -72,6 +74,14 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
 
     public void addAllItems(List<Contacto> items) {
         contactos.clear();
+        if (items.size() > 0) {
+            Collections.sort(items, new Comparator<Contacto>() {
+                @Override
+                public int compare(final Contacto object1, final Contacto object2) {
+                    return object1.getFirstName().compareTo(object2.getFirstName());
+                }
+            });
+        }
         contactos.addAll(items);
         notifyDataSetChanged();
     }

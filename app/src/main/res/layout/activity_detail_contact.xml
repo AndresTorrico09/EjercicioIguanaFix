@@ -40,4 +40,16 @@
         android:layout_height="@dimen/heigth_detail_contact"
         android:layout_gravity="center"
         android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/tvAdressHome"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/heigth_detail_contact"
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/tvAdressWork"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/heigth_detail_contact"
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
 </LinearLayout>
